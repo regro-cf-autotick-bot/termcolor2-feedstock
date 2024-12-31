@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/termcolor2-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/termcolor2-{{ version }}.tar.gz
   sha256: 63ad2eaf1801c919cbeca60a62c099b330338740c8cc4422717b236f3c8f98a7
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
-    - python
+    - python >={{ python_min }}
     - termcolor
 
 test:
@@ -30,6 +30,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/v2e4lisp/termcolor2
